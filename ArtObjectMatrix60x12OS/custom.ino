@@ -208,7 +208,6 @@ void customModes(byte aMode) {
     case DEMO_RAINBOW_DIAG:        rainbowDiagonalRoutine(); break;
     case DEMO_FIRE:                fireRoutine(); break;
     case DEMO_SNAKE:               snakeRoutine(); break;
-    case DEMO_CLOCK:               clockRoutine(); break;
     case DEMO_DAWN_ALARM:          dawnProcedure(); break;
     case DEMO_FILL_COLOR:          fillColorProcedure(); break;
 
@@ -451,7 +450,6 @@ byte mapEffectToMode(byte effect) {
     case EFFECT_FIRE:                tmp_mode = DEMO_FIRE; break;                 // fireRoutine()
     case EFFECT_MATRIX:              tmp_mode = DEMO_MATRIX; break;               // matrixRoutine();
     case EFFECT_BALLS:               tmp_mode = DEMO_BALLS; break;                // ballsRoutine();
-    case EFFECT_CLOCK:               tmp_mode = DEMO_CLOCK; break;                // clockRoutine();
     case EFFECT_STARFALL:            tmp_mode = DEMO_STARFALL; break;             // starfallRoutine()
     case EFFECT_SPARKLES:            tmp_mode = DEMO_SPARKLES; break;             // sparklesRoutine()
     case EFFECT_RAINBOW_DIAG:        tmp_mode = DEMO_RAINBOW_DIAG; break;         // rainbowDiagonalRoutine();
@@ -488,7 +486,6 @@ byte mapEffectToModeCode(byte effect) {
     case EFFECT_FIRE:                tmp_mode = MC_FIRE; break;                 // fireRoutine()
     case EFFECT_MATRIX:              tmp_mode = MC_MATRIX; break;               // matrixRoutine();
     case EFFECT_BALLS:               tmp_mode = MC_BALLS; break;                // ballsRoutine();
-    case EFFECT_CLOCK:               tmp_mode = MC_CLOCK; break;                // clockRoutine();
     case EFFECT_STARFALL:            tmp_mode = MC_STARFALL; break;             // starfallRoutine()
     case EFFECT_SPARKLES:            tmp_mode = MC_SPARKLES; break;             // sparklesRoutine()
     case EFFECT_RAINBOW_DIAG:        tmp_mode = MC_RAINBOW_DIAG; break;         // rainbowDiagonalRoutine();
@@ -551,7 +548,6 @@ byte mapModeToEffect(byte aMode) {
     case DEMO_RAINBOW:              tmp_effect = EFFECT_RAINBOW;  break;            // rainbowRoutine();
     case DEMO_RAINBOW_DIAG:         tmp_effect = EFFECT_RAINBOW_DIAG; break;        // rainbowDiagonalRoutine();
     case DEMO_FIRE:                 tmp_effect = EFFECT_FIRE;  break;               // fireRoutine()
-    case DEMO_CLOCK:                tmp_effect = EFFECT_CLOCK;  break;              // clockRoutine()
     case DEMO_DAWN_ALARM:           tmp_effect = EFFECT_DAWN_ALARM; break;          // alarmProcedure();
     case DEMO_FILL_COLOR:           tmp_effect = EFFECT_FILL_COLOR; break;          // fillColorProcedure();
     
@@ -612,7 +608,6 @@ byte mapModeToGame(byte aMode) {
     case DEMO_TEXT_11:               break;       // Бегущий текст
     case DEMO_TEXT_12:               break;       // Бегущий текст
     case DEMO_SNAKE:    tmp_game = GAME_SNAKE;    break;     // snakeRoutine(); 
-    case DEMO_CLOCK:                break;  // clockRoutine();     
   }
   return tmp_game;
 }

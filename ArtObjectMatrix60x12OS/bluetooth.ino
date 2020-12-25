@@ -82,7 +82,7 @@ void bluetoothRoutine() {
     if (useAutoBrightness && autoBrightnessTimer.isReady()) {
       // Во время работы будильника-рассвет, ночных часов, если матрица "выключена" или один из режимов "лампы" - освещения
       // авторегулировки яркости нет.    
-      if (!(isAlarming || isNightClock || isTurnedOff || specialModeId == 2 || specialModeId == 3 || specialModeId == 6 || specialModeId == 7 || thisMode == DEMO_DAWN_ALARM)) {
+      if (!(isAlarming || isTurnedOff || specialModeId == 2 || specialModeId == 3 || specialModeId == 6 || specialModeId == 7 || thisMode == DEMO_DAWN_ALARM)) {
         // 300 - это при макс. освещении, чтобы макс возможный 255 наступал не на грани порога чувствительности ФР, а немного раньше  
         int16_t val = (byte)brightness_filter.filtered((int16_t)map(analogRead(PHOTO_PIN),0,1023,0,300)); 
         if (val < autoBrightnessMin) val = autoBrightnessMin;
@@ -104,8 +104,7 @@ void bluetoothRoutine() {
     // При яркости = 1 остаются гореть только красные светодиоды и все эффекты теряют вид.
     // поэтому отображать эффект "ночные часы"
     byte br = specialMode ? specialBrightness : globalBrightness;
-    if (br == 1 && !(loadingFlag || isAlarming)) {
-      doEffectWithOverlay(DEMO_CLOCK);    
+    if (br == 1 && !(loadingFlag || isAlarming)) {   
     } 
     
     else if (runningFlag && !isAlarming) {                         // бегущая строка - Running Text
@@ -145,7 +144,7 @@ void bluetoothRoutine() {
     }
 
     // Бегущая строка или Часы в основном режиме и эффект Дыхание или Цвета, Радуга пикс
-    else if ((thisMode == DEMO_TEXT_0 || thisMode == DEMO_TEXT_1 || thisMode == DEMO_TEXT_2 || thisMode == DEMO_TEXT_3 || thisMode == DEMO_TEXT_4 || thisMode == DEMO_TEXT_5 || thisMode == DEMO_TEXT_6 || thisMode == DEMO_TEXT_7 || thisMode == DEMO_TEXT_8 || thisMode == DEMO_TEXT_9 || thisMode == DEMO_TEXT_10 || thisMode == DEMO_TEXT_11 || thisMode == DEMO_TEXT_12 || thisMode == DEMO_TEXT_13 || thisMode == DEMO_CLOCK) && effectsFlag && isColorEffect(effect) && !isAlarming) { 
+    else if ((thisMode == DEMO_TEXT_0 || thisMode == DEMO_TEXT_1 || thisMode == DEMO_TEXT_2 || thisMode == DEMO_TEXT_3 || thisMode == DEMO_TEXT_4 || thisMode == DEMO_TEXT_5 || thisMode == DEMO_TEXT_6 || thisMode == DEMO_TEXT_7 || thisMode == DEMO_TEXT_8 || thisMode == DEMO_TEXT_9 || thisMode == DEMO_TEXT_10 || thisMode == DEMO_TEXT_11 || thisMode == DEMO_TEXT_12 || thisMode == DEMO_TEXT_13) && effectsFlag && isColorEffect(effect) && !isAlarming) { 
 
       // Подготовить изображение
       customModes(thisMode);
@@ -1404,7 +1403,7 @@ void sendPageParams(int page) {
       str+=String(globalBrightness) + "|SE:" + String(constrain(map(effectSpeed, D_EFFECT_SPEED_MIN,D_EFFECT_SPEED_MAX, 0, 255), 0,255));
       str+="|BU:" + String(useAutoBrightness ? "1" : "0");    
       str+="|BY:" + String(autoBrightnessMin);       
-      if (isColorEffect(effect) || !allowed || effect == EFFECT_CLOCK) 
+      if (isColorEffect(effect)) 
           str+="|EC:X";  // X - параметр не используется (неприменим)
       else    
           str+="|EC:" + String(getEffectClock(effect));
@@ -1554,7 +1553,7 @@ void setSpecialMode(int spc_mode) {
       break;
     case 1:  // Черный экран с часами;  
       tmp_eff = EFFECT_FILL_COLOR;
-      specialClock = true;
+      specialClock = false;
       setGlobalColor(0x000000);
       break;
     case 2:  // Белый экран (освещение);
@@ -1564,20 +1563,20 @@ void setSpecialMode(int spc_mode) {
       break;
     case 3:  // Белый экран с часами;
       tmp_eff = EFFECT_FILL_COLOR;
-      specialClock = true;
+      specialClock = false;
       setGlobalColor(0xffffff);
       break;
     case 4:  // Черный экран с часами минимальной яркости - ночной режим;
       tmp_eff = EFFECT_FILL_COLOR;
-      specialClock = true;
+      specialClock = false;
       setGlobalColor(0x000000);
       COLOR_MODE = 0; // Монохром, т.к все что не белоена миним. яркости черное, белое - красным.
       specialBrightness = 1;
-      isNightClock = true;
+      isNightClock = false;
       break;
     case 5:  // Черный экран с эффектом огня и часами (камин);
       tmp_eff = EFFECT_FIRE;
-      specialClock = true;
+      specialClock = false;
       break;
     case 6:  // Экран указанного цвета;
       tmp_eff = EFFECT_FILL_COLOR;
@@ -1588,7 +1587,7 @@ void setSpecialMode(int spc_mode) {
     case 7:  // Экран указанного цвета с часами;
       tmp_eff = EFFECT_FILL_COLOR;
       str = String(incomeBuffer).substring(6,12); // $14 6 00FFAA;
-      specialClock = true;
+      specialClock = false;
       setGlobalColor((uint32_t)HEXtoInt(str));
       break;
   }

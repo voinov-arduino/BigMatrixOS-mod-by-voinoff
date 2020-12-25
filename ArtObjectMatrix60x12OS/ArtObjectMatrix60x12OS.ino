@@ -20,7 +20,7 @@
 
 // ************************ МАТРИЦА *************************
 
-#define BRIGHTNESS 96         // стандартная маскимальная яркость (0-255)
+#define BRIGHTNESS 120         // стандартная маскимальная яркость (0-255)
 #define CURRENT_LIMIT 1800   // лимит по току в миллиамперах, автоматически управляет яркостью (пожалей свой блок питания!) 0 - выключить лимит
 
 #define WIDTH 60
@@ -101,7 +101,7 @@ boolean AUTOPLAY = 1;         // 0 выкл / 1 вкл автоматическ�
 // Это нужно сделать вручную во вкладке custom, удалив ненужные функции
 
 #define USE_NOISE_EFFECTS 1 // крутые полноэкранные эффекты (0 нет, 1 да) СИЛЬНО ЖРУТ ПАМЯТЬ!!!
-#define OVERLAY_CLOCK 1     // часы на фоне всех эффектов и игр. Жрёт SRAM память!
+#define OVERLAY_CLOCK 0     // часы на фоне всех эффектов и игр. Жрёт SRAM память!
 #define USE_FONTS 1         // использовать буквы (бегущая строка) (0 нет, 1 да)
 
 // включение / отключение игр
@@ -185,14 +185,13 @@ byte COLOR_MODE = 0;
 #define DEMO_RAINBOW_DIAG        30
 #define DEMO_FIRE                31
 #define DEMO_SNAKE               32
-#define DEMO_CLOCK               33
-#define DEMO_FILL_COLOR          34  // Заливка матрицы одним цветом
-#define DEMO_DAWN_ALARM          35  // Режим эффекта будильника "Рассвет"
+#define DEMO_FILL_COLOR          33  // Заливка матрицы одним цветом
+#define DEMO_DAWN_ALARM          34  // Режим эффекта будильника "Рассвет"
 // ---------------------------------
 
 // не забудьте указать количество режимов для корректного переключения с последнего на первый
 // количество кастомных режимов (которые переключаются сами или кнопкой)
-#define MODES_AMOUNT 36
+#define MODES_AMOUNT 35
 
 // ---------------------------------
 #define DEMO_DAWN_ALARM_SPIRAL 253  // Специальный режим, вызывается из DEMO_DAWN_ALARM для ламп на круговой матрице - огонек по спирали
@@ -209,28 +208,27 @@ byte COLOR_MODE = 0;
 #define EFFECT_FIRE                 6
 #define EFFECT_MATRIX               7
 #define EFFECT_BALLS                8
-#define EFFECT_CLOCK                9
-#define EFFECT_STARFALL            10
-#define EFFECT_SPARKLES            11
-#define EFFECT_RAINBOW_DIAG        12
-#define EFFECT_NOISE_MADNESS       13
-#define EFFECT_NOISE_CLOUD         14
-#define EFFECT_NOISE_LAVA          15
-#define EFFECT_NOISE_PLASMA        16
-#define EFFECT_NOISE_RAINBOW       17
-#define EFFECT_NOISE_RAINBOW_STRIP 18
-#define EFFECT_NOISE_ZEBRA         19
-#define EFFECT_NOISE_FOREST        20
-#define EFFECT_NOISE_OCEAN         21
-#define EFFECT_FILL_COLOR          22
-#define EFFECT_DAWN_ALARM          23
-#define EFFECT_ANIMATION_1         24
-#define EFFECT_ANIMATION_2         25
-#define EFFECT_ANIMATION_3         26
-#define EFFECT_ANIMATION_4         27
-#define EFFECT_ANIMATION_5         28
+#define EFFECT_STARFALL             9
+#define EFFECT_SPARKLES            10
+#define EFFECT_RAINBOW_DIAG        11
+#define EFFECT_NOISE_MADNESS       12
+#define EFFECT_NOISE_CLOUD         13
+#define EFFECT_NOISE_LAVA          14
+#define EFFECT_NOISE_PLASMA        15
+#define EFFECT_NOISE_RAINBOW       16
+#define EFFECT_NOISE_RAINBOW_STRIP 17
+#define EFFECT_NOISE_ZEBRA         18
+#define EFFECT_NOISE_FOREST        19
+#define EFFECT_NOISE_OCEAN         20
+#define EFFECT_FILL_COLOR          21
+#define EFFECT_DAWN_ALARM          22
+#define EFFECT_ANIMATION_1         23
+#define EFFECT_ANIMATION_2         24
+#define EFFECT_ANIMATION_3         25
+#define EFFECT_ANIMATION_4         26
+#define EFFECT_ANIMATION_5         27
 
-#define MAX_EFFECT                 29         // количество эффектов, определенных в прошивке
+#define MAX_EFFECT                 28         // количество эффектов, определенных в прошивке
 
 // Сквозная нумерация (ID) игр в группе игр
 #define GAME_SNAKE                  0
@@ -382,7 +380,7 @@ bool isTurnedOff = false;          // Включен черный экран (т
 
 GFilterRA brightness_filter;       // фильтр для плавного изменения яркости
 bool useAutoBrightness = false;    // Использовать автоматическую регулировку яркости
-byte autoBrightnessMin = 1;        // Минимальный уровень яркости при автоматической регулировке
+byte autoBrightnessMin = 50;        // Минимальный уровень яркости при автоматической регулировке
 
 // ---- Режимы, включаемые в заданное время
 
